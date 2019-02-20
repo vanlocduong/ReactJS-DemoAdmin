@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 
 export default class Search extends Component {
+    hienThiNut=()=>{
+        if (this.props.hienThiForm===true){
+            return <div className="btn btn-block btn-outline-secondary" onClick={() => this.props.ketNoi()}> Đóng Lại </div>;
+        }else{
+            
+            return <div className="btn btn-block btn-outline-info" onClick={() => this.props.ketNoi()}> Thêm Mới </div>;
+        }
+    }
   render() {
     return (
         <div>
@@ -12,8 +20,8 @@ export default class Search extends Component {
                 </div>
             </div>
                 <div className="btn-group1">
-                    <div className="btn btn-block btn-outline-secondary" onClick={() => this.props.ketNoi()}> Đóng Lại </div>
-                    return <div className="btn btn-block btn-outline-info" onClick={() => this.props.ketNoi()}> Thêm Mới </div>;
+                    {this.hienThiNut()}
+                    
                 </div>
             <hr/>
         </div>
