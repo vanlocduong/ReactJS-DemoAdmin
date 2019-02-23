@@ -10,7 +10,9 @@ class App extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        hienThiForm : true
+        hienThiForm : true,
+        dataUserProps: Data,
+        searchText : ''
       }
     }
     
@@ -21,16 +23,33 @@ class App extends Component {
       datauser : Data
     });
   }
+
+  getTextSearch =(giaTriText)=>{
+    this.setState({
+      searchText: giaTriText
+    })
+    
+  }
+
   render() {
-    console.log(this.state.datauser)
+    // console.log(this.state.dataUserProps)
+    var ketqua = [];
+    this.state.dataUserProps.forEach((element) => {
+      if (element.name.indexOf(this.state.searchText) !== -1){
+        ketqua.push(element);
+      }
+    });
+    console.log(ketqua);
     return (
       <div>
         <Header />
         <div className="serchForm">
           <div className="container">
             <div className="row">
-              <Search ketNoi={() => this.doiTrangThai()} hienThiForm={this.state.hienThiForm}/>
-              <TableData />
+              <Search
+                checkConnectionSearch={(giaTriText) => this.getTextSearch(giaTriText)} 
+              ketNoi={() => this.doiTrangThai()} hienThiForm={this.state.hienThiForm}/>
+              <TableData dataUserProps={this.state.dataUserProps}/>
               <AppUser hienThiForm={this.state.hienThiForm}/>
               </div>
             </div>

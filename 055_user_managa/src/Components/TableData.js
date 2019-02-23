@@ -1,80 +1,30 @@
 import React, { Component } from 'react'
-
+import TableDataRow from './TableDataRow.js';
 export default class TableData extends Component {
+    mappingDataUser =()=>{
+        return  this.props.dataUserProps.map((value,key)=>(
+            <TableDataRow stt={key} username={value.name} sodt={value.tel} permisssion={value.permisssion}></TableDataRow>
+        )
+        )
+    }
+   
   render() {
+    //   console.log(this.props.dataUserProps);
+    //   console.log(this.props.sodt);
     return (
-        <div className="col-9">
+        <div className="col">
             <table className="table table-striped table-inverse table-hover">
-                <thead className="thead-inverse">
+                <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Tên</th>
-                        <th>Điện Thoại</th>
-                        <th>Quyền</th>
+                        <th>Tên Vị Tướng </th>
+                        <th>Số Mật Danh</th>
+                        <th>Vai Trò</th>
                         <th>Thao Tác</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td >1</td>
-                        <td>Dương Văn Lộc</td>
-                        <td>0252122551</td>
-                        <td>Develop</td>
-                        <td>
-                            <div className="btn-group">
-                                <div className="btn btn-warning sua"> <i className="fa fa-edit    " />Sửa</div>
-                                <div className="btn btn-danger xoa"> <i className="fa fa-delete    " />Xóa</div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td >1</td>
-                        <td>Dương Văn Lộc</td>
-                        <td>0252122551</td>
-                        <td>Develop</td>
-                        <td>
-                            <div className="btn-group">
-                                <div className="btn btn-warning sua"> <i className="fa fa-edit    " />Sửa</div>
-                                <div className="btn btn-danger xoa"> <i className="fa fa-delete    " />Xóa</div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td >1</td>
-                        <td>Dương Văn Lộc</td>
-                        <td>0252122551</td>
-                        <td>Develop</td>
-                        <td>
-                            <div className="btn-group">
-                                <div className="btn btn-warning sua"> <i className="fa fa-edit    " />Sửa</div>
-                                <div className="btn btn-danger xoa"> <i className="fa fa-delete    " />Xóa</div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td >1</td>
-                        <td>Dương Văn Lộc</td>
-                        <td>0252122551</td>
-                        <td>Develop</td>
-                        <td>
-                            <div className="btn-group">
-                                <div className="btn btn-warning sua"> <i className="fa fa-edit    " />Sửa</div>
-                                <div className="btn btn-danger xoa"> <i className="fa fa-delete    " />Xóa</div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td >1</td>
-                        <td>Dương Văn Lộc</td>
-                        <td>0252122551</td>
-                        <td>Develop</td>
-                        <td>
-                            <div className="btn-group">
-                                <div className="btn btn-warning sua"> <i className="fa fa-edit    " />Sửa</div>
-                                <div className="btn btn-danger xoa"> <i className="fa fa-delete    " />Xóa</div>
-                            </div>
-                        </td>
-                    </tr>
+                    {this.mappingDataUser()} 
                 </tbody>
             </table>
         </div>

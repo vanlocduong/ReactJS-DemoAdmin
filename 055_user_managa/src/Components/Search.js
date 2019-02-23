@@ -1,6 +1,21 @@
 import React, { Component } from 'react'
 
 export default class Search extends Component {
+    constructor(props) {
+        super(props);
+        this.state ={
+            tempValue: ''
+        }
+    }
+    
+
+    isChangeSearch =(valueChange)=>{
+        console.log(valueChange.target.value)
+        this.setState({
+            tempValue : valueChange.target.value
+        })
+    }
+
     hienThiNut=()=>{
         if (this.props.hienThiForm===true){
             return <div className="btn btn-block btn-outline-secondary" onClick={() => this.props.ketNoi()}> Đóng Lại </div>;
@@ -15,8 +30,9 @@ export default class Search extends Component {
         <div className="col-12">
             <div className="form-group">
                 <div className="btn-group">
-                    <input type="text" className="form-control" style={{ width: '600px' }}  placeholder="Nhập từ khóa" />
-                    <div className="btn btn-info"> Tìm </div>
+                    <input type="text" className="form-control" style={{ width: '600px' }} 
+                     placeholder="Nhập từ khóa" onChange={(valueChange)=>this.isChangeSearch(valueChange)}/>
+                        <div className="btn btn-info" onClick={(dl)=>this.props.checkConnectionSearch(this.state.tempValue)}> Tìm </div>
                 </div>
             </div>
                 <div className="btn-group1">

@@ -4,6 +4,7 @@ export default class AppUser extends Component {
     hienThiForm =()=>{
       if (this.props.hienThiForm === true) {
         return (
+          <div className="col-12">
           <div className="card boder-primary mb-3 mt-2">
             <div className="card-header">Thêm mới User vào hệ thống</div>
             <div className="card-body text-primary">
@@ -29,18 +30,19 @@ export default class AppUser extends Component {
               </div>
             </div>
           </div>
+          </div>
         );
       }
     }
 
   render() {
     return (
-      <div className="col-3">
+      
         <div >
           {this.hienThiForm() }
           
         </div>
-      </div>
+      
     )
   }
 }
