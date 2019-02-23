@@ -8,14 +8,16 @@ export default class Search extends Component {
         }
     }
     
-
+    // ham tim kiem gia tri
     isChangeSearch =(valueChange)=>{
         console.log(valueChange.target.value)
         this.setState({
             tempValue : valueChange.target.value
-        })
+        });
+        this.props.checkConnectionSearch(this.state.tempValue);  // tim kiem live
     }
 
+    // hien thi nut 2 button
     hienThiNut=()=>{
         if (this.props.hienThiForm===true){
             return <div className="btn btn-block btn-outline-secondary" onClick={() => this.props.ketNoi()}> Đóng Lại </div>;
@@ -27,7 +29,7 @@ export default class Search extends Component {
   render() {
     return (
         <div>
-        <div className="col-12">
+        <div className="col">
             <div className="form-group">
                 <div className="btn-group">
                     <input type="text" className="form-control" style={{ width: '600px' }} 

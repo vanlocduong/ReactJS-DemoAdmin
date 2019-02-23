@@ -5,6 +5,7 @@ import Search from './Search.js'
 import TableData from './TableData.js'
 import AppUser from './AppUser.js'
 import Data from './Data.json'
+const uuidv1 = require('uuid/v1');
 
 class App extends Component {
     constructor(props) {
@@ -12,7 +13,11 @@ class App extends Component {
       this.state = {
         hienThiForm : true,
         dataUserProps: Data,
-        searchText : ''
+        searchText : '',
+        id: "",
+        name: "",
+        tel: "",
+        permisssion: "",
       }
     }
     
@@ -30,6 +35,22 @@ class App extends Component {
     })
     
   }
+
+  addNewUser = (name,tel,permisson) => {
+    alert(" ket noi thanh cong ");
+    var item = {};
+    item.id = uuidv1();
+    item.name = name;
+    item.tel = tel;
+    item.permisson = permisson;
+    var items = this.state.dataUserProps;
+    items.push(item);
+
+    this.setState({
+      dataUserProps : items
+    })
+    console.log(items);
+  };
 
   render() {
     // console.log(this.state.dataUserProps)
@@ -49,8 +70,8 @@ class App extends Component {
               <Search
                 checkConnectionSearch={(giaTriText) => this.getTextSearch(giaTriText)} 
               ketNoi={() => this.doiTrangThai()} hienThiForm={this.state.hienThiForm}/>
-              <TableData dataUserProps={this.state.dataUserProps}/>
-              <AppUser hienThiForm={this.state.hienThiForm}/>
+              <TableData dataUserProps={ketqua}/>
+              <AppUser add = { (name,tel, permisson)=> this.addNewUser(name,tel,permisson)}  hienThiForm={this.state.hienThiForm}/>
               </div>
             </div>
           </div>
