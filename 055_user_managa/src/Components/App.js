@@ -18,9 +18,16 @@ class App extends Component {
         name: "",
         tel: "",
         permisssion: "",
+        editUserStatus: true,
+        userEditObject: {}
       }
     }
     
+  isChangeEditUserStatus = () => {
+    this.setState({
+      editUserStatus : !this.state.editUserStatus
+    })
+  }
 
   doiTrangThai =()=>{
     this.setState({
@@ -52,6 +59,19 @@ class App extends Component {
     console.log(items);
   };
 
+  editFunLuuDuLieuNhanVe = (user) => {
+    this.setState({
+      userEditObject: user 
+    });
+    console.log(user);
+    
+  }
+
+  getUserEditInfoApp = (info)=>{
+    console.log("thong tin da sua xong " + info.name);
+    
+  }
+
   render() {
     // console.log(this.state.dataUserProps)
     var ketqua = [];
@@ -68,9 +88,17 @@ class App extends Component {
           <div className="container">
             <div className="row">
               <Search
+                getUserEditInfoApp={(info) => this.getUserEditInfoApp(info)}
+                userEditObject={this.state.userEditObject}
                 checkConnectionSearch={(giaTriText) => this.getTextSearch(giaTriText)} 
-              ketNoi={() => this.doiTrangThai()} hienThiForm={this.state.hienThiForm}/>
-              <TableData dataUserProps={ketqua}/>
+              ketNoi={() => this.doiTrangThai()} hienThiForm={this.state.hienThiForm}
+                editUserStatus={this.state.editUserStatus}
+                changeEditUserStatus={() => this.isChangeEditUserStatus()}
+                
+              />
+              <TableData
+                changeEditUserStatus={() => this.isChangeEditUserStatus()}
+               editFun={ (user)=>this.editFunLuuDuLieuNhanVe(user)} dataUserProps={ketqua}/>
               <AppUser add = { (name,tel, permisson)=> this.addNewUser(name,tel,permisson)}  hienThiForm={this.state.hienThiForm}/>
               </div>
             </div>

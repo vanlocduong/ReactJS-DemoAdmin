@@ -10,6 +10,11 @@ export default class componentName extends Component {
       return "Pháp Sư";
     }
   }
+  editFunClickRow = () => {
+    this.props.editFunClick();
+    this.props.changeEditUserStatus();
+  
+  }
 
   render() {
     return (
@@ -21,8 +26,9 @@ export default class componentName extends Component {
                 <td>{this.setPermisson()}</td>
                 <td>
                     <div className="btn-group">
-                        <div className="btn btn-warning sua"> <i className="fa fa-edit    " />Sửa</div>
-                        <div className="btn btn-danger xoa"> <i className="fa fa-delete    " />Xóa</div>
+                         <div className="btn btn-warning sua" onClick={() => this.editFunClickRow()}>
+                          <i className="fa fa-edit " />Sửa</div>
+                        <div className="btn btn-danger xoa"> <i className="fa fa-delete " />Xóa</div>
                     </div>
                 </td>
             </tr>

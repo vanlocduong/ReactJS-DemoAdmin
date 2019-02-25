@@ -69,7 +69,6 @@ export default class AppUser extends Component {
     }
 
   render() {
-    console.log(this.state);
     return (
         <div >
           {this.hienThiForm() }
