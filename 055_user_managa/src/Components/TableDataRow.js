@@ -10,10 +10,17 @@ export default class componentName extends Component {
       return "Pháp Sư";
     }
   }
+
+  
+
   editFunClickRow = () => {
     this.props.editFunClick();
     this.props.changeEditUserStatus();
   
+  }
+
+  deleteUserClick =(idUser)=>{
+    this.props.deleteUserClick(idUser);
   }
 
   render() {
@@ -28,7 +35,8 @@ export default class componentName extends Component {
                     <div className="btn-group">
                          <div className="btn btn-warning sua" onClick={() => this.editFunClickRow()}>
                           <i className="fa fa-edit " />Sửa</div>
-                        <div className="btn btn-danger xoa"> <i className="fa fa-delete " />Xóa</div>
+                        <div className="btn btn-danger xoa" onClick={(idUser) => this.deleteUserClick(this.props.id)}>
+                         <i className="fa fa-delete " />Xóa</div>
                     </div>
                 </td>
             </tr>

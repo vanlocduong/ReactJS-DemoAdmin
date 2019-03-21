@@ -22,6 +22,19 @@ class App extends Component {
         userEditObject: {}
       }
     }
+
+
+
+  componentWillMount() {
+    if (localStorage.getItem('userData') === null) {
+      localStorage.setItem('userData', JSON.stringify(Data));
+    }else{
+      var temp = JSON.parse(localStorage.getItem('userData'));
+      this.setState({
+        dataUserProps : temp
+      })
+    }
+  }
     
   isChangeEditUserStatus = () => {
     this.setState({
@@ -44,7 +57,6 @@ class App extends Component {
   }
 
   addNewUser = (name,tel,permisson) => {
-    alert(" ket noi thanh cong ");
     var item = {};
     item.id = uuidv1();
     item.name = name;
@@ -56,19 +68,33 @@ class App extends Component {
     this.setState({
       dataUserProps : items
     })
-    console.log(items);
+    localStorage.setItem('userData', JSON.stringify(items));
   };
 
   editFunLuuDuLieuNhanVe = (user) => {
     this.setState({
       userEditObject: user 
     });
-    console.log(user);
     
   }
 
+  deleteUser =(idUser)=>{
+    var tempData = this.state.dataUserProps.filter(item => item.id !== idUser);
+    this.setState({
+      dataUserProps: tempData
+    });
+    localStorage.setItem('userData',JSON.stringify(tempData));
+  }
+
   getUserEditInfoApp = (info)=>{
-    console.log("thong tin da sua xong " + info.name);
+    this.state.dataUserProps.forEach((value,key)=>{
+      if(value.id === info.id){
+        value.name = info.name;
+        value.tel = info.tel;
+        value.permisssion = info.permisssion
+      }
+    })
+    localStorage.setItem('userData', JSON.stringify(this.state.dataUserProps));
     
   }
 
@@ -80,7 +106,6 @@ class App extends Component {
         ketqua.push(element);
       }
     });
-    console.log(ketqua);
     return (
       <div>
         <Header />
@@ -97,6 +122,7 @@ class App extends Component {
                 
               />
               <TableData
+              deleteUser ={(idUser) => this.deleteUser(idUser)}
                 changeEditUserStatus={() => this.isChangeEditUserStatus()}
                editFun={ (user)=>this.editFunLuuDuLieuNhanVe(user)} dataUserProps={ketqua}/>
               <AppUser add = { (name,tel, permisson)=> this.addNewUser(name,tel,permisson)}  hienThiForm={this.state.hienThiForm}/>
