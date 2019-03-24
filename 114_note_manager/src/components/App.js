@@ -7,17 +7,26 @@ import NoteList from './NoteList';
 import NoteForm from './NoteForm';
 
 class App extends Component {
+
+
+  addData = (item)=>{
+    noteData.push(item);
+  }
   render() {
-    console.log("nodata ", noteData);
+    // console.log("nodata ", noteData);
+    // noteData.once('value').then(function(snapshot){
+    //   console.log(snapshot.val());
+    // });
+
     return (
       <div>
         <Nav/>
         <div class="container">
           <div class="row">
             <NoteList/>
-            <NoteForm/>
-            </div>
+            <NoteForm getData={(item) => this.addData(item) }/>
           </div>
+        </div>
       </div>
     );
   }

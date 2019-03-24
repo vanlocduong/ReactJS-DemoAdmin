@@ -7,4 +7,5 @@ var config = {
     storageBucket: "notereactjs-9eb05.appspot.com",
     messagingSenderId: "796596240964"
 };
-export const noteData = firebase.initializeApp(config); 
+firebase.initializeApp(config); 
+export const noteData = firebase.database().ref('dataForNote');
