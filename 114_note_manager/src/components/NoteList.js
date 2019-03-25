@@ -1,65 +1,59 @@
 import React, { Component } from 'react'
+import NoteItem from './NoteItem';
+import { noteData } from './firebaseConnect';
 
 export default class NoteList extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataFirebase: []
+    
+        }    
+    }
+    // take data before rendering will user componentWillMount
+    componentWillMount(){
+    // take data from firebase 
+    noteData.on('value', (notes) => {
+
+        var arrayData = [];
+        notes.forEach(element => {
+            const key = element.key;
+            const noteTitle = element.val().noteTitle;
+            const noteContent = element.val().noteContent;
+            arrayData.push({
+                id: key,
+                noteTitle: noteTitle,
+                noteContent: noteContent
+
+            })
+        });
+        // put the data into the state to get the print to the screen
+        this.setState({
+            dataFirebase: arrayData,
+        })
+
+        // console.log('array ', arrayData);
+    })
+    }
+    getData =() => {
+        console.log('datafirebase ', this.state.dataFirebase);
+    }
+
   render() {
+
+
+
     return (
 		
         <div className="col">
             <div id="noteList" role="tablist" aria-multiselectable="true">
-                <div className="card">
-                    <div className="card-header" role="tab" id="note1">
-                        <h5 className="mb-0">
-                            <a
-                                data-toggle="collapse"
-                                data-parent="#noteList"
-                                href="#noteContent1"
-                                aria-expanded="true"
-                                aria-controls="noteContent1"
-                            >
-                                Ghi Chú 21/03/2019
-                            </a>
-                        </h5>
-                    </div>
-                    <div
-                        id="noteContent1"
-                        className="collapse in"
-                        role="tabpanel"
-                        aria-labelledby="section1HeaderId"
-                    >
-                        <div className="card-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, cupiditate
-                            earum. Nostrum, obcaecati, eaque doloribus officiis ea accusamus cumque adipisci
-                            quos quaerat recusandae quo minus consectetur perspiciatis suscipit labore odit.
-                        </div>
-                    </div>
-                </div>
-                <div className="card">
-                    <div className="card-header" role="tab" id="note2">
-                        <h5 className="mb-0">
-                            <a
-                                data-toggle="collapse"
-                                data-parent="#noteList"
-                                href="#noteContent2"
-                                aria-expanded="true"
-                                aria-controls="noteContent2"
-                            >
-                                Ghi Chú 21/03/2019 2
-                            </a>
-                        </h5>
-                    </div>
-                    <div
-                        id="noteContent2"
-                        className="collapse in"
-                        role="tabpanel"
-                        aria-labelledby="section2HeaderId"
-                    >
-                        <div className="card-body">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore aliquam
-                            officiis ducimus rerum quidem saepe ipsum ullam corporis velit recusandae sunt
-                            facere dolore dolor repellendus voluptatum, a dolorem fugiat laboriosam!
-                        </div>
-                    </div>
-                </div>
+            {
+                this.getData()
+            
+            }
+                <NoteItem/>
+                
             </div>
         </div>
         
