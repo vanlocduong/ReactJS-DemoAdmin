@@ -12,9 +12,9 @@ const allReducer = (state = noteinitialState, action) => {
   switch (action.type) {
 
     case "ADD_DATA":
-
-          console.log(" them thanh cong bien nhan vao la ", action.getItem);
-        return { ...state }
+          noteData.push(action.getItem);
+          console.log(" them thanh cong bien nhan vao la ", JSON.stringify(action.getItem));
+        return state;
 
     default:
         return state

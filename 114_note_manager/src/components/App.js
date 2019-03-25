@@ -8,10 +8,10 @@ import NoteForm from './NoteForm';
 
 class App extends Component {
 
-
-  addData = (item)=>{
-    noteData.push(item);
-  }
+// use redux not use react-js pure
+  // addData = (item)=>{
+  //   noteData.push(item);
+  // }
   render() {
     // console.log("nodata ", noteData);
     // noteData.once('value').then(function(snapshot){
