@@ -29,6 +29,7 @@ class NoteForm extends Component {
 
 			//console.log('du lieu dan sua la ', editObject);
 			this.props.editDataStore(editObject);
+			this.props.changEditStatus();
 			
 		}else{
 			var item = {};
@@ -116,6 +117,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		editDataStore: (getItem) => {
 			dispatch({ type: 'EDIT', getItem })
+		},
+		changEditStatus: () => {
+			dispatch({ type: 'CHANGE_EDIT_STATUS' });
 		},
 	};
 }
