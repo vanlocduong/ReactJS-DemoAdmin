@@ -7,6 +7,7 @@ class NoteForm extends Component {
 		this.state = {
 			noteTitle: '',
 			noteContent: '',
+			id: '',
 		};
 	}
 	
@@ -20,19 +21,44 @@ class NoteForm extends Component {
 	}
 
 	addData = (title, content) => {
-		
-		var item = {};
-		item.noteTitle = title;
-		item.noteContent = content;
+		if(this.state.id){
+			var editObject = {};
+			editObject.id = this.state.id;
+			editObject.noteContent = this.state.noteContent;
+			editObject.noteTitle = this.state.noteTitle;
 
-		// this.props.getData(item);
-		// alert('Them du lieu '+ JSON.stringify(item) + 'thanh cong ');
-		// item = JSON.stringify(item);
-		// console.log('item ', item)
-		this.props.addDataStore(item);
+			//console.log('du lieu dan sua la ', editObject);
+			this.props.editDataStore(editObject);
+			
+		}else{
+			var item = {};
+			item.noteTitle = title;
+			item.noteContent = content;
+
+			// this.props.getData(item);
+			// alert('Them du lieu '+ JSON.stringify(item) + 'thanh cong ');
+			// item = JSON.stringify(item);
+			// console.log('item ', item)
+			this.props.addDataStore(item);
+		}
+		
+		
 	}
+	componentWillMount() {
+	//	console.log('note loc', this.props.editItem.noteContent);
+		
+	  if(this.props.editItem){
+		this.setState({
+			id: this.props.editItem.id,
+			noteTitle: this.props.editItem.noteTitle,
+			noteContent: this.props.editItem.noteContent,
+		});
+	  }
+	}
+	
 
   render() {
+		console.log('loc ', this.props.editItem);
 		
     return (
 		<div className="col-4">
@@ -41,6 +67,7 @@ class NoteForm extends Component {
 			<div className="form-group">
 				<label htmlFor="noteTitle">Tiêu Đề Note </label>
 				<input
+				defaultValue ={this.props.editItem.noteTitle}
 					onChange={(event) => this.isChange(event)}
 					type="text"
 					className="form-control"
@@ -63,7 +90,7 @@ class NoteForm extends Component {
 					id="noteContent"
 					aria-describedby="helpNoteId"
 					placeholder="Nội Dung  Note "
-					defaultValue={''}
+					defaultValue={this.props.editItem.noteContent}
 				/>
 				<small id="helpNoteId" className="form-text text-muted">
 					Điền Title vào đây{' '}
@@ -79,13 +106,16 @@ class NoteForm extends Component {
 }
 const mapStateToProps = (state, ownProps) => {
 	return {
-		testConnect: state.testConnectStore,
+		editItem: state.editItem,
 	};
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
 		addDataStore: (getItem) => {
-			dispatch({ type: 'ADD_DATA' , getItem}) 
+			dispatch({ type: 'ADD_DATA' , getItem})
+		},
+		editDataStore: (getItem) => {
+			dispatch({ type: 'EDIT', getItem })
 		},
 	};
 }

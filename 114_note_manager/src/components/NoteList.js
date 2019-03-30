@@ -37,7 +37,21 @@ export default class NoteList extends Component {
     })
     }
     getData =() => {
-        console.log('datafirebase ', this.state.dataFirebase);
+        if(this.state.dataFirebase){
+            // console.log('data ', this.state.dataFirebase);
+           return  this.state.dataFirebase.map((value, key)=>{
+                return (
+                    <NoteItem
+                    key = {key}
+                    index = {key}
+                    note = {value}
+                      noteTitle ={value.noteTitle}
+                      noteContent = {value.noteContent}
+                    />
+
+                )
+            });
+        }
     }
 
   render() {
@@ -52,7 +66,6 @@ export default class NoteList extends Component {
                 this.getData()
             
             }
-                <NoteItem/>
                 
             </div>
         </div>
