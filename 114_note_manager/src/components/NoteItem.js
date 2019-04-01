@@ -53,7 +53,8 @@ class NoteItem extends Component {
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        isEdit: state.isEdit
+			isEdit: state.isEdit,
+			changeAddStatus: state.isAdd
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -65,6 +66,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			dispatch({
 				type: 'GET_EDIT_DATA',
 				editObject,
+			});
+		},
+		changeAddStatusNav: () => {
+			dispatch({
+				type: 'CHANGE_ADD_STATUS',
 			});
 		},
 		deleteData: (idData)=>{

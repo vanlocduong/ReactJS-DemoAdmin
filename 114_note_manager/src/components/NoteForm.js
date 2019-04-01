@@ -56,50 +56,60 @@ class NoteForm extends Component {
 		});
 	  }
 	}
-	
+	printTitleAdd=()=>{
+		if(this.props.isChangeAdd){
+			return <h4>Them Moi</h4>
+		}else{
+			return <h4>Sua Noi Dung</h4>;
+		}
+	}
 
   render() {
 		console.log('loc ', this.props.editItem);
 		
     return (
 		<div className="col-4">
-			<h3>Sua Noi Dung Text</h3>
+			{this.printTitleAdd()}
 			<form>
-			<div className="form-group">
-				<label htmlFor="noteTitle">Tiêu Đề Note </label>
-				<input
-				defaultValue ={this.props.editItem.noteTitle}
-					onChange={(event) => this.isChange(event)}
-					type="text"
-					className="form-control"
-					name="noteTitle"
-					id="noteTitle"
-					aria-describedby="helpNoteId"
-					placeholder="Tiêu Đề Note "
-				/>
-				<small id="helpNoteId" className="form-text text-muted">
-					Điền Title vào đây{' '}
-				</small>
-			</div>
-			<div className="form-group">
-				<label htmlFor="noteTitle">Nội Dung Note </label>
-				<textarea
-					onChange={(event) => this.isChange(event)}
-					type="text"
-					className="form-control"
-					name="noteContent"
-					id="noteContent"
-					aria-describedby="helpNoteId"
-					placeholder="Nội Dung  Note "
-					defaultValue={this.props.editItem.noteContent}
-				/>
-				<small id="helpNoteId" className="form-text text-muted">
-					Điền Title vào đây{' '}
-				</small>
-			</div>
-					<button type="reset" onClick={() => this.addData(this.state.noteTitle, this.state.noteContent)} className="btn btn-primary btn-block">
-				Lưu
-			</button>
+				<div className="form-group">
+					<label htmlFor="noteTitle">Tiêu Đề Note </label>
+					<input
+						defaultValue={this.props.editItem.noteTitle}
+						onChange={event => this.isChange(event)}
+						type="text"
+						className="form-control"
+						name="noteTitle"
+						id="noteTitle"
+						aria-describedby="helpNoteId"
+						placeholder="Tiêu Đề Note "
+					/>
+					<small id="helpNoteId" className="form-text text-muted">
+						Điền Title vào đây{' '}
+					</small>
+				</div>
+				<div className="form-group">
+					<label htmlFor="noteTitle">Nội Dung Note </label>
+					<textarea
+						onChange={event => this.isChange(event)}
+						type="text"
+						className="form-control"
+						name="noteContent"
+						id="noteContent"
+						aria-describedby="helpNoteId"
+						placeholder="Nội Dung  Note "
+						defaultValue={this.props.editItem.noteContent}
+					/>
+					<small id="helpNoteId" className="form-text text-muted">
+						Điền Title vào đây{' '}
+					</small>
+				</div>
+				<button
+					type="reset"
+					onClick={() => this.addData(this.state.noteTitle, this.state.noteContent)}
+					className="btn btn-primary btn-block"
+				>
+					Lưu
+				</button>
 			</form>
 		</div>
 	);
@@ -108,6 +118,7 @@ class NoteForm extends Component {
 const mapStateToProps = (state, ownProps) => {
 	return {
 		editItem: state.editItem,
+		isChangeAdd: state.isAdd,
 	};
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -121,6 +132,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		changEditStatus: () => {
 			dispatch({ type: 'CHANGE_EDIT_STATUS' });
 		},
+		changeAddStatusNav: () => {
+			dispatch({
+				type: 'CHANGE_ADD_STATUS',
+			});
+		}
 	};
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NoteForm);
