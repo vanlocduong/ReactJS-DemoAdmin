@@ -10,7 +10,8 @@ class NoteItem extends Component {
 		this.props.getEditData(this.props.note);
 	};
 	deleteData =()=>{
-        this.props.deleteData(this.props.note.id);
+		this.props.deleteData(this.props.note.id);
+		this.props.changAlertON('xóa ghi chú " '+ this.props.noteTitle+ '" Thành công ')
     }
 	render() {
 		return (
@@ -78,7 +79,21 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				type: 'DELETE_DATA',
 				idData,
 			});
-        }
+		},
+		changAlertON: alertcontent => {
+			dispatch(
+				{
+					type: 'CHANGE_ALERT_ON',
+					alertcontent
+				},
+			);
+		},
+		changAlertOFF: alertcontent => {
+			dispatch({
+				type: 'CHANGE_ALERT_OFF',
+				alertcontent,
+			});
+		},
 	};
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NoteItem)

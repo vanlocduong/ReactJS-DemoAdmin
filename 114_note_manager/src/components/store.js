@@ -8,6 +8,8 @@ const noteinitialState = {
     isEdit : false,
 		editItem : {},
 		isAdd : false,
+		alertShow: false,
+		alertContent: '',
 }
 
 const allReducer = (state = noteinitialState, action) => {
@@ -32,6 +34,10 @@ const allReducer = (state = noteinitialState, action) => {
 			});
 			console.log('du lieu da cap nhat ', JSON.stringify(action.getItem));
 			return { ...state, editItem: {} };
+		case 'CHANGE_ALERT_ON':
+			return { ...state, alertShow: true, alertContent: action.alertcontent };
+		case 'CHANGE_ALERT_OFF':
+			return { ...state, alertShow: false, alertContent: action.alertcontent };
 		default:
 			return state;
   }

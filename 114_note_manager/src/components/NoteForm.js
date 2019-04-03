@@ -30,7 +30,7 @@ class NoteForm extends Component {
 			//console.log('du lieu dan sua la ', editObject);
 			this.props.editDataStore(editObject);
 			this.props.changEditStatus();
-			
+			this.props.changAlertON("Sửa Thành Công");
 		}else{
 			var item = {};
 			item.noteTitle = title;
@@ -41,6 +41,7 @@ class NoteForm extends Component {
 			// item = JSON.stringify(item);
 			// console.log('item ', item)
 			this.props.addDataStore(item);
+			this.props.changAlertON('Thêm Mới Thành Công');
 		}
 		
 		
@@ -119,15 +120,16 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		editItem: state.editItem,
 		isChangeAdd: state.isAdd,
+		alertShow: state.alertShow,
 	};
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		addDataStore: (getItem) => {
-			dispatch({ type: 'ADD_DATA' , getItem})
+		addDataStore: getItem => {
+			dispatch({ type: 'ADD_DATA', getItem });
 		},
-		editDataStore: (getItem) => {
-			dispatch({ type: 'EDIT', getItem })
+		editDataStore: getItem => {
+			dispatch({ type: 'EDIT', getItem });
 		},
 		changEditStatus: () => {
 			dispatch({ type: 'CHANGE_EDIT_STATUS' });
@@ -136,7 +138,21 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			dispatch({
 				type: 'CHANGE_ADD_STATUS',
 			});
-		}
+		},
+		changAlertON: alertcontent => {
+			dispatch(
+				{
+					type: 'CHANGE_ALERT_ON',
+					alertcontent
+				},
+			);
+		},
+		changAlertOFF: alertcontent => {
+			dispatch({
+				type: 'CHANGE_ALERT_OFF',
+				alertcontent,
+			});
+		},
 	};
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NoteForm);
